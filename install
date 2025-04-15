@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+version=`docker run --rm -v ${PWD}:/app ruby ruby -r yaml -e "puts(YAML.load(File.read('/app/etc/config.yaml.tmpl'))[:version])"`
+
+arch=$(uname -m)
+if [ "$arch" == "aarch64" ];then
+  os_arch='linux-arm64'
+else
+  os_arch='linux-amd64'
+fi
+
+wget -q -O gpg.key https://rpm.grafana.com/gpg.key
+rpm --import gpg.key
+
+cat <<EOF > /etc/yum.repos.d/grafana.repo
+[grafana]
+name=grafana
+baseurl=https://rpm.grafana.com
+repo_gpgcheck=1
+enabled=1
+gpgcheck=1
+gpgkey=https://rpm.grafana.com/gpg.key
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+EOF
+
+yum install -y grafana-agent
+
+mkdir -p /var/lib/grafana-agent
+chmod -R 777 /var/lib/grafana-agent
+
+mkdir -p /var/log/grafana-agent
+chmod -R 777 /var/log/grafana-agent

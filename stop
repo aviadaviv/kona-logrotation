@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+/etc/init.d/kona-logrotation.ctl stop
+
+(docker rm -f kona-logrotation-app &> /dev/null) || true

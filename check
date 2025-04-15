@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#sleep_time=2
+#url="http://localhost:9292/status"
+#time=60
+#while [ "$time" -gt "0" ];do
+#  curl $url 2> /dev/null
+#  REVAL=$?
+#  if [ $REVAL == "0" ]; then
+#    exit $REVAL
+#  else
+#    echo "Sleeping.. and trying again in "$sleep_time
+#    sleep $sleep_time
+#    time=$[$time - $sleep_time]
+#  fi
+#done
+#
+#echo "Failed to check status @ ${url}"
+#exit $REVAL
