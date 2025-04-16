@@ -12,7 +12,6 @@ while true; do
 
     if [ -z "$log_files" ]; then
         log "No log files found in /usr/kona/*/current/log/daemon.out"
-        sleep 5m
         continue
     fi
 
@@ -28,5 +27,5 @@ while true; do
         fi
     done
     log "Completed log rotation cycle"
-    sleep 1d
+    sleep 5m
 done
