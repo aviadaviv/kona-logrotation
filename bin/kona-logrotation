@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Set sleep duration (use format: 5m, 5h, or 5d)
-SLEEP_TIME="5m"
+SLEEP_TIME="2d"
 
 while true; do
     # Find log files
