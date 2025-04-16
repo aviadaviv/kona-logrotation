@@ -12,7 +12,7 @@ while true; do
 
     if [ -z "$log_files" ]; then
         log "No log files found in /usr/kona/*/current/log/daemon.out"
-        sleep 1d
+        sleep 5m
         continue
     fi
 
