@@ -1,31 +1,26 @@
 #!/usr/bin/env bash
 
-# Set up logging
-LOG_FILE="/var/log/kona-logrotation.log"
-log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
-}
-
 while true; do
-    # Find log files safely using find instead of ls
-    log_files=$(find /usr/kona -type f -path "*/current/log/daemon.out" 2>/dev/null)
+    # Find log files
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Finding log files"
+    log_files=$(find /usr/kona/*/current/log/ -type f -path "*daemon*")
 
     if [ -z "$log_files" ]; then
-        log "No log files found in /usr/kona/*/current/log/daemon.out"
+        echo "$(date '+%Y-%m-%d %H:%M:%S') - No log files found in /usr/kona/*/current/log/"
         continue
     fi
 
-    log "Starting log rotation cycle"
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting log rotation cycle"
     for file in $log_files; do
         if [ -f "$file" ]; then
-            log "Processing: $file"
+            echo "$(date '+%Y-%m-%d %H:%M:%S') - Processing: $file"
             if ! echo "" > "$file"; then
-                log "Error: Failed to clear $file"
+                echo "$(date '+%Y-%m-%d %H:%M:%S') - Error: Failed to clear $file"
             fi
         else
-            log "Warning: $file does not exist"
+            echo "$(date '+%Y-%m-%d %H:%M:%S') - Warning: $file does not exist"
         fi
     done
-    log "Completed log rotation cycle"
-    sleep 5m
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Completed log rotation cycle"
+    sleep 2m
 done
