@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Set up logging
-# LOG_FILE="/var/log/kona-logrotation.log"
-# log() {
-#     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
-# }
+LOG_FILE="/var/log/kona-logrotation.log"
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+}
 
 while true; do
     # Find log files safely using find instead of ls
