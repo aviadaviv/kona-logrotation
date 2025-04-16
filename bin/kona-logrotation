@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Set sleep duration (use format: 5m, 5h, or 5d)
+SLEEP_TIME="5m"
+
 while true; do
     # Find log files
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Finding log files"
@@ -21,6 +24,6 @@ while true; do
             echo "$(date '+%Y-%m-%d %H:%M:%S') - Warning: $file does not exist"
         fi
     done
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - Completed log rotation cycle"
-    sleep 2m
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - Completed log rotation cycle. Sleeping for ${SLEEP_TIME}"
+    sleep ${SLEEP_TIME}
 done
